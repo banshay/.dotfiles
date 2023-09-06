@@ -108,7 +108,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',       opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -157,7 +157,7 @@ require('lazy').setup({
   -- Or with configuration
   {
     'projekt0n/github-nvim-theme',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('github-theme').setup({
@@ -213,7 +213,7 @@ require('lazy').setup({
     end,
   },
 
-  {"nvim-treesitter/playground"},
+  { "nvim-treesitter/playground" },
 
   {
     -- Highlight, edit, and navigate code
@@ -241,18 +241,19 @@ require('lazy').setup({
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
+    -- config = function()
+    --   require("nvim-surround").setup({
+    --     -- Configuration here, or leave empty to use defaults
+    --   })
+    -- end
   },
 
   {
     "mbbill/undotree",
   },
 
-  { "theprimeagen/harpoon",
+  {
+    "theprimeagen/harpoon",
     config = function()
       require("harpoon").setup({
         menu = {
@@ -339,10 +340,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    path_display = {
+      truncate = {},
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+      },
+    },
+    pickers = {
+      lsp_references = {
+        fname_width = 100,
+        show_line = false,
       },
     },
   },
@@ -374,6 +384,10 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'java', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  sync_install = false,
+  ignore_install = {},
+  modules = {},
+  
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -485,6 +499,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  nmap("gl", vim.cmd.Format, "Format File")
 end
 
 -- Enable the following language servers
@@ -592,3 +608,23 @@ require("my_harpoon")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+
+-- close quickfix menu after selecting choice
+vim.api.nvim_create_autocmd(
+  "FileType", {
+    pattern = { "qf" },
+    command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
+  }
+)
+
+
+-- autosave when focus lost or buffer changes
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+  callback = function()
+    if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+      vim.api.nvim_command('silent update')
+    end
+  end
+})
