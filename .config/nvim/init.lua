@@ -262,7 +262,10 @@ require('lazy').setup({
       })
     end
   },
-  { "ThePrimeagen/vim-be-good" }
+  { "ThePrimeagen/vim-be-good" },
+
+  { "mfussenegger/nvim-jdtls" },
+
 }, {})
 
 -- [[ Setting options ]]
@@ -313,7 +316,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 16
 
 -- [[ Basic Keymaps ]]
 
@@ -387,7 +390,7 @@ require('nvim-treesitter.configs').setup {
   sync_install = false,
   ignore_install = {},
   modules = {},
-  
+
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -484,8 +487,8 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  --nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<K>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<leader>K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -549,8 +552,9 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
-  end
+  end,
 }
+
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -628,3 +632,8 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
     end
   end
 })
+
+
+-- autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+-- autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+-- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
