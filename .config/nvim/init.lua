@@ -554,6 +554,7 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
+  ["jdtls"] = function() end,
 }
 
 
