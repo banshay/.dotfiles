@@ -65,7 +65,13 @@ local config = {
   init_options = {
     bundles = {}
   },
+
+  on_attach = require("lsp_keymaps"),
 }
+
+--keymaps, hopefully
+-- require("lsp-zero.cmp-mapping")
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
