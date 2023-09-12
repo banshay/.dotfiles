@@ -20,6 +20,7 @@ local config = {
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+    '-javaagent:$HOME/.local/share/nvim/mason/packages/jdtls/lombok.jar',
 
     --
     '-jar', '$HOME/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
@@ -67,3 +68,4 @@ local config = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
+print("hello world jdtls")
