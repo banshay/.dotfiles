@@ -1,4 +1,4 @@
-return function(_, bufnr)
+return function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -36,10 +36,11 @@ return function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-
-  nmap("gl", vim.cmd.Format, "Format File")
+  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  --   vim.lsp.buf.format()
+  -- end, { desc = 'Format current buffer with LSP' })
+  --
+  -- nmap("gl", vim.cmd.Format, "Format File")
+  nmap("gl", vim.lsp.buf.format, "Format File")
 end
 

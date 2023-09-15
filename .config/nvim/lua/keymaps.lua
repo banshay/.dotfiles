@@ -1,4 +1,8 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", function () 
+  require "telescope".extensions.file_browser.file_browser({
+    path = vim.fn.expand("%:p:h")
+  })
+end)
 
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")

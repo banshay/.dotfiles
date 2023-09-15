@@ -1,6 +1,6 @@
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = vim.fn.stdpath("data") .. "/" .. project_name
+local workspace_dir = vim.fn.stdpath("data") .. "/jdtls/workspace/" .. project_name
 local home_dir = vim.fs.normalize("~")
 
 local config = {
@@ -9,7 +9,7 @@ local config = {
   cmd = {
 
     -- 💀
-    'java', -- or '/path/to/java17_or_newer/bin/java'
+    home_dir .. "/.sdkman/candidates/java/current/bin/java",
             -- depends on if `java` is in your $PATH env variable and if it points to the right version.
 
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
@@ -45,13 +45,19 @@ local config = {
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew', 'pom.xml'}),
+  root_dir = require('jdtls.setup').find_root({'.git'}),
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   -- for a list of options
   settings = {
     java = {
+      format = {
+        enabled = true,
+        settings = {
+          url = vim.fn.stdpath("config") .. "eclipse-java-google-style.xml",
+        }
+      }
     }
   },
 
@@ -69,8 +75,6 @@ local config = {
   on_attach = require("lsp_keymaps"),
 }
 
---keymaps, hopefully
--- require("lsp-zero.cmp-mapping")
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
