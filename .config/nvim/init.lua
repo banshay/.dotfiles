@@ -248,11 +248,9 @@ require('lazy').setup({
       "kylechui/nvim-surround",
       version = "*", -- Use for stability; omit to use `main` branch for the latest features
       event = "VeryLazy",
-      -- config = function()
-      --   require("nvim-surround").setup({
-      --     -- Configuration here, or leave empty to use defaults
-      --   })
-      -- end
+      config = function()
+        require("nvim-surround").setup()
+      end
    },
 
    {
@@ -623,7 +621,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
          local full_file_name = vim.fn.expand("%:p")
          local command = "java -jar " ..
              vim.fn.expand("~/.local/share/nvim/mason/packages/google-java-format/") ..
-             "google-java-format-1.17.0-all-deps.jar --replace " .. full_file_name
+             "google-java-format-1.17.0-all-deps.jar --replace --skip-reflowing-long-strings" .. full_file_name
 
          -- local replace_content = function(_, data)
          --   if data then
