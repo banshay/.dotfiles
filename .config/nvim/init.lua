@@ -634,11 +634,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
       vim.fn.jobstart(command, {
         -- stdout_buffered = true,
         -- on_stdout = replace_content,
-        on_stderr = function(_, err)
-          if err then
-            print(vim.inspect(err))
-          end
-        end,
+        -- on_stderr = function(_, err)
+        --   if err then
+        --     print(vim.inspect(err))
+        --   end
+        -- end,
         on_exit = function()
           vim.api.nvim_cmd({
             cmd = "edit"
