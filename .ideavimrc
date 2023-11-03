@@ -59,9 +59,8 @@ nnoremap <leader>y \"+y
 vnoremap <leader>y \"+y
 nnoremap <leader>Y \"+Y
 
-nnoremap <C-c> <Esc>
+nnoremap <C-c> <Action>(EditorEscape)
 nnoremap <C-C> :action FocusEditor<CR>
-nnoremap <q> :action EditorEscape<CR>
 
 onoremap F vF
 onoremap T vT
@@ -75,6 +74,8 @@ nnoremap <leader>a :action Annotate<CR>
 nnoremap gl :action ReformatCode<CR>
 nnoremap <leader>e :action ShowErrorDescription<CR>
 nnoremap <leader>co :action CloseAllEditorsButActive<CR>
+nmap <leader>sf <Action>(GotoFile)
+imap <a-k> <Action>(ParameterInfo)
 
 nnoremap gcc :action CommentByLineComment<CR>
 vnoremap gc :action CommentByLineComment<CR>
