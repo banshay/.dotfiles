@@ -12,3 +12,5 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessi
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
+
+vim.keymap.set("n", "gl", vim.lsp.buf.format)
