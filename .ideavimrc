@@ -20,7 +20,6 @@ set relativenumber number
 set visualbell
 set noerrorbells
 
-
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
