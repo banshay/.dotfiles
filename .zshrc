@@ -135,3 +135,4 @@ export WSLENV="$WSLENV:JAVA_HOME/p"
 
 # opam configuration
 [[ ! -r /home/bopplu/.opam/opam-init/init.zsh ]] || source /home/bopplu/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+#this is a test 
