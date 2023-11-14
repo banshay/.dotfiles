@@ -124,14 +124,12 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
+if [ -f ~/.localrc ]; then
+    . ~/.localrc
+fi
+
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/bopplu/.sdkman"
-[[ -s "/home/bopplu/.sdkman/bin/sdkman-init.sh" ]] && source "/home/bopplu/.sdkman/bin/sdkman-init.sh"
 export WSLENV="$WSLENV:JAVA_HOME/p"
-
-# opam configuration
-[[ ! -r /home/bopplu/.opam/opam-init/init.zsh ]] || source /home/bopplu/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
