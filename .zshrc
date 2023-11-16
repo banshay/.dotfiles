@@ -131,5 +131,4 @@ fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
-
 export WSLENV="$WSLENV:JAVA_HOME/p"
