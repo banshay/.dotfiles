@@ -61,6 +61,8 @@ nnoremap <leader>Y \"+Y
 nnoremap <C-c> <Action>(EditorEscape)
 nnoremap <C-C> :action FocusEditor<CR>
 
+nnoremap <gr> <Action>(GotoSuperMethod)
+
 onoremap F vF
 onoremap T vT
 
