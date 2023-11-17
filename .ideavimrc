@@ -58,10 +58,10 @@ nnoremap <leader>y \"+y
 vnoremap <leader>y \"+y
 nnoremap <leader>Y \"+Y
 
-nnoremap <C-c> <Action>(EditorEscape)
-nnoremap <C-C> :action FocusEditor<CR>
+nmap <C-c> <Action>(EditorEscape)
+nmap <C-C> <Action>(FocusEditor)
 
-nnoremap gr <Action>(GotoSuperMethod)
+nmap gr <Action>(GotoSuperMethod)
 
 onoremap F vF
 onoremap T vT
