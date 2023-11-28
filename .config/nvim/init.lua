@@ -132,42 +132,32 @@ require('lazy').setup({
     },
   },
 
-  -- {
-  --   -- Theme inspired by Atom
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'onedark'
-  --   end,
-  -- },
-  -- {
-  --   "briones-gabriel/darcula-solid.nvim",
-  --   dependencies = "rktjmp/lush.nvim",
-  --   config = function()
-  --     vim.cmd 'colorscheme darcula-solid'
-  --   end,
-  -- },
-  -- {
-  --   "banshay/my_color_scheme",
-  --   config = function()
-  --     vim.cmd.colorscheme "intellij_new"
-  --   end
-  -- },
-  -- Install without configuration
-  { 'projekt0n/github-nvim-theme' },
 
   -- Or with configuration
+  -- {
+  --   'projekt0n/github-nvim-theme',
+  --   lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     require('github-theme').setup({
+  --       -- ...
+  --     })
+  --
+  --     vim.cmd('colorscheme github_dark')
+  --   end,
+  -- },
   {
-    'projekt0n/github-nvim-theme',
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    dir = "/home/bopplu/private/projects/intellij-new-theme-nvim",
+    dev= true,
     config = function()
-      require('github-theme').setup({
-        -- ...
-      })
+      vim.cmd("colorscheme intellij-new")
+    end
+  },
 
-      vim.cmd('colorscheme github_dark')
-    end,
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
 
 
@@ -556,7 +546,6 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -587,11 +576,6 @@ cmp.setup {
 require("keymaps")
 
 require("my_harpoon")
-
--- vim.cmd.colorscheme "intellij_new"
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
 
 
 

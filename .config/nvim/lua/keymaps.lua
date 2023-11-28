@@ -14,3 +14,6 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
 vim.keymap.set("n", "gl", vim.lsp.buf.format)
+
+vim.keymap.set("n", "<C-R>", function() require("lazy.core.loader").reload("intellij-new-theme-nvim") end)
+vim.keymap.set("n", "gi", vim.cmd.Inspect)
