@@ -147,7 +147,7 @@ require('lazy').setup({
   --   end,
   -- },
   {
-    dir = "/home/bopplu/private/projects/intellij-new-theme-nvim",
+    dir = "/home/banshay/projects/intellij-new-theme-nvim",
     dev= true,
     config = function()
       vim.cmd("colorscheme intellij-new")
@@ -304,14 +304,14 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
+-- vim.o.termguicolors = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.scrolloff = 16
+vim.opt.scrolloff = 8
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
