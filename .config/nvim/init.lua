@@ -108,7 +108,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',       opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -147,8 +147,10 @@ require('lazy').setup({
   --   end,
   -- },
   {
-    dir = "/home/banshay/projects/intellij-new-theme-nvim",
-    dev= true,
+    "banshay/intellij-new-theme-nvim",
+    name = "intellij-new-theme-nvim",
+    dir = "~/private/projects/intellij-new-theme-nvim",
+    dev = true,
     config = function()
       vim.cmd("colorscheme intellij-new")
     end
@@ -249,6 +251,8 @@ require('lazy').setup({
 
   {
     "theprimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("harpoon").setup({
         menu = {
@@ -285,9 +289,6 @@ vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
@@ -353,11 +354,10 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-    pickers = {
-      lsp_references = {
-        fname_width = 100,
-        show_line = false,
-      },
+  },
+  pickers = {
+    lsp_references = {
+      show_line = false,
     },
   },
   extensions = {
@@ -366,6 +366,10 @@ require('telescope').setup {
     }
   }
 }
+
+-- require("telescope.builtin").lsp_references({
+--   show_line = false,
+-- })
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -384,13 +388,15 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>gcb', require('telescope.builtin').git_branches, { desc = 'Search [G]it [B]ranches' })
+vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Search [G]it [C]ommits' })
+vim.keymap.set('n', '<leader>gh', require('telescope.builtin').git_stash, { desc = 'Search [G]it Stas[h]' })
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Search [G]it [B]ranches' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>o', require('telescope.builtin').treesitter, { desc = 'Treesitter' })
+vim.keymap.set('n', '<leader>t', require('telescope.builtin').treesitter, { desc = 'Treesitter' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -587,7 +593,6 @@ vim.api.nvim_create_autocmd(
   }
 )
 
-
 -- autosave when focus lost or buffer changes
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   callback = function()
@@ -632,3 +637,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end
   end,
 })
+
+vim.api.nvim_create_user_command("Json", function()
+  vim.cmd("set ft=json")
+  vim.cmd("syntax on")
+  vim.cmd("set foldmethod=syntax")
+end, {})

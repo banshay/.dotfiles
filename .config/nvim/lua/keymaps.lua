@@ -15,7 +15,7 @@ vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
 vim.keymap.set("n", "gl", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<C-R>", function() require("lazy.core.loader").reload("intellij-new-theme-nvim") end)
+vim.keymap.set("n", "<C-S-r>", function() require("lazy.core.loader").reload("intellij-new-theme-nvim") end)
 vim.keymap.set("n", "gi", vim.cmd.Inspect)
 
 vim.keymap.set("n", "<leader>o", 'o<Esc>0"_D')
@@ -37,3 +37,5 @@ vim.keymap.set("n", '<LEADER>ci"', 'ci"<C-r>"')
 vim.keymap.set("n", "<LEADER>ci(", 'ci(<C-r>"')
 
 vim.keymap.set("n", "ff", "<C-v>")
+
+vim.keymap.set("n", "<C-W>c", "<C-W>q")
