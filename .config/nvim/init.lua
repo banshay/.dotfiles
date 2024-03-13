@@ -148,9 +148,9 @@ require('lazy').setup({
   -- },
   {
     "banshay/intellij-new-theme-nvim",
-    name = "intellij-new-theme-nvim",
-    dir = "~/private/projects/intellij-new-theme-nvim",
-    dev = true,
+    -- name = "intellij-new-theme-nvim",
+    -- dir = "~/private/projects/intellij-new-theme-nvim",
+    -- dev = true,
     config = function()
       vim.cmd("colorscheme intellij-new")
     end
@@ -264,6 +264,16 @@ require('lazy').setup({
   { "ThePrimeagen/vim-be-good" },
 
   { "mfussenegger/nvim-jdtls" },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
 
 }, {})
 
