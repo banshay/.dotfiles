@@ -31,7 +31,6 @@ set noerrorbells
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
 
-
 " Find more examples here: https://jb.gg/share-ideavimrc
 let mapleader = " "
 xnoremap <leader>p \"_dP
