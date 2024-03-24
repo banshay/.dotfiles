@@ -1,0 +1,1 @@
+/home/banshay/projects/my_color_scheme/colors/intellij_new.vim
