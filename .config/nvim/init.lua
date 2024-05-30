@@ -66,7 +66,7 @@ require("lazy").setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
 	-- Git related plugins
-	-- "tpope/vim-fugitive",
+	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
 	-- Detect tabstop and shiftwidth automatically
@@ -688,6 +688,19 @@ require("lazy").setup({
 			})
 		end,
 	},
+
+	-- Vim Tmux Runner vtr
+	{
+		"christoomey/vim-tmux-runner",
+		config = function()
+			-- Vim-Tmux-Runner Config
+			print("Setting config for vim-tmux-runner")
+			vim.cmd([[
+      let g:VtrPercentage = 30
+      let g:VtrOrientation = "h"
+      ]])
+		end,
+	},
 }, {})
 
 --ufo required options
@@ -822,7 +835,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 -- vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Search [G]it [C]ommits' })
 -- vim.keymap.set('n', '<leader>gh', require('telescope.builtin').git_stash, { desc = 'Search [G]it Stas[h]' })
--- vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Search [G]it [B]ranches' })
+vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_branches, { desc = "Search [G]it [B]ranches" })
 -- vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 -- vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 -- vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
