@@ -41,6 +41,9 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.VtrOrientation = "h"
+vim.g.VtrPercentage = 35
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -692,14 +695,6 @@ require("lazy").setup({
 	-- Vim Tmux Runner vtr
 	{
 		"christoomey/vim-tmux-runner",
-		config = function()
-			-- Vim-Tmux-Runner Config
-			print("Setting config for vim-tmux-runner")
-			vim.cmd([[
-      let g:VtrPercentage = 30
-      let g:VtrOrientation = "h"
-      ]])
-		end,
 	},
 }, {})
 
