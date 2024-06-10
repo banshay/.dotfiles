@@ -48,13 +48,33 @@ vim.keymap.set("n", "<leader>]", ":Ex<CR>k<CR>")
 vim.keymap.set("n", "<leader>ja", function()
 	vim.cmd("VtrAttachToPane")
 end)
+
 vim.keymap.set("n", "<leader>jp", function()
-	vim.cmd("VtrSendCommandToRunner! zig build")
+	local buildCommand = vim.g.VTRBUILD
+	if buildCommand then
+		vim.cmd("VtrSendCommandToRunner! " .. buildCommand)
+	else
+		vim.cmd("VtrSendCommandToRunner! zig build")
+	end
 end)
-vim.keymap.set("n", "<leader>jt", function()
+
+vim.keymap.set("n", "<leader>jf", function()
 	local fileName = vim.fn.expand("%")
 	print("Filename: " .. fileName)
 	vim.cmd("VtrSendCommandToRunner! zig test " .. fileName)
+end)
+
+vim.keymap.set("n", "<leader>jt", function()
+	vim.cmd("VtrSendCommandToRunner! zig build test")
+end)
+
+vim.keymap.set("n", "<leader>jr", function()
+	local runCommand = vim.g.VTRRUN
+	if runCommand then
+		vim.cmd("VtrSendCommandToRunner! " .. runCommand)
+	else
+		vim.cmd("VtrSendCommandToRunner! zig build run")
+	end
 end)
 
 local function open_next_file()
