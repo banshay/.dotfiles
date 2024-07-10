@@ -42,7 +42,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.VtrOrientation = "h"
-vim.g.VtrPercentage = 35
+vim.g.VtrPercentage = 45
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -69,8 +69,8 @@ require("lazy").setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
 	-- Git related plugins
-	"tpope/vim-fugitive",
-	"tpope/vim-rhubarb",
+	-- "tpope/vim-fugitive",
+	-- "tpope/vim-rhubarb",
 
 	-- Detect tabstop and shiftwidth automatically
 	-- 'tpope/vim-sleuth',
@@ -173,6 +173,7 @@ require("lazy").setup({
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					vim.keymap.set("i", "<M-k>", vim.lsp.buf.hover)
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
@@ -556,7 +557,11 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				-- pickers = {}
+				pickers = {
+					lsp_references = {
+						show_line = false,
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -664,6 +669,7 @@ require("lazy").setup({
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
+		commit = "e76cb03",
 		dependencies = "nvim-lua/plenary.nvim",
 	},
 	{ "ThePrimeagen/vim-be-good" },

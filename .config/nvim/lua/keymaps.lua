@@ -52,7 +52,7 @@ end)
 vim.keymap.set("n", "<leader>jp", function()
 	local buildCommand = vim.g.VTRBUILD
 	if buildCommand then
-		vim.cmd("VtrSendCommandToRunner! " .. buildCommand)
+		vim.cmd("VtrSendCommandToRunner!" .. buildCommand)
 	else
 		vim.cmd("VtrSendCommandToRunner! zig build")
 	end
@@ -65,7 +65,7 @@ vim.keymap.set("n", "<leader>jf", function()
 end)
 
 vim.keymap.set("n", "<leader>jt", function()
-	vim.cmd("VtrSendCommandToRunner! zig build test")
+	vim.cmd("VtrSendCommandToRunner! zig build test --summary all")
 end)
 
 vim.keymap.set("n", "<leader>jr", function()
@@ -75,6 +75,9 @@ vim.keymap.set("n", "<leader>jr", function()
 	else
 		vim.cmd("VtrSendCommandToRunner! zig build run")
 	end
+end)
+vim.keymap.set("n", "<leader>jc", function()
+	vim.cmd("VtrSendCtrlC")
 end)
 
 local function open_next_file()
