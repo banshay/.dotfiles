@@ -1,3 +1,6 @@
+vim.keymap.set("c", "help", "vert bo help", { noremap = true })
+vim.cmd.cabbrev("h", "vert bo h")
+
 vim.keymap.set("n", "<leader>pv", function()
 	require("telescope").extensions.file_browser.file_browser({
 		path = vim.fn.expand("%:p:h"),
