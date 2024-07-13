@@ -85,7 +85,7 @@ require("lazy").setup({
 
 			-- Useful status updates for LSP.
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", commit = "c12f8a5", opts = {} },
 
 			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
 			-- used for completion, annotations and signatures of Neovim apis
@@ -466,7 +466,7 @@ require("lazy").setup({
 				vim.keymap.set(
 					"n",
 					"<leader>gp",
-					require("gitsigns").prev_hunk,
+					require("gitsigns").preview_hunk,
 					{ buffer = bufnr, desc = "[G]o to [P]revious Hunk" }
 				)
 				vim.keymap.set(
@@ -480,6 +480,12 @@ require("lazy").setup({
 					"<leader>ph",
 					require("gitsigns").preview_hunk,
 					{ buffer = bufnr, desc = "[P]review [H]unk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>rh",
+					require("gitsigns").reset_hunk,
+					{ buffer = bufnr, desc = "[R]eset [H]unk" }
 				)
 			end,
 		},
