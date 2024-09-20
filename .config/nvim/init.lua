@@ -157,7 +157,7 @@ require("lazy").setup({
 					-- Fuzzy find all the symbols in your current workspace.
 					--  Similar to document symbols, except searches over your entire project.
 					map(
-						"<leader>es",
+						"<leader>ws",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
 						"[W]orkspace [S]ymbols"
 					)
@@ -410,6 +410,7 @@ require("lazy").setup({
 
 	-- Useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
+	{ "tpope/vim-fugitive" },
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -718,7 +719,6 @@ require("lazy").setup({
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
-		commit = "e76cb03",
 		dependencies = "nvim-lua/plenary.nvim",
 	},
 	{ "ThePrimeagen/vim-be-good" },

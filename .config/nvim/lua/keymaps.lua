@@ -12,7 +12,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>")
 
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+-- vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
@@ -48,6 +48,11 @@ vim.keymap.set("n", "<C-W>c", "<C-W>q")
 vim.keymap.set("n", "<leader>[", ":Ex<CR>j<CR>")
 vim.keymap.set("n", "<leader>]", ":Ex<CR>k<CR>")
 
+vim.keymap.set("n", "<leader>so", function()
+	require("telescope.builtin").lsp_document_symbols({ symbols = "function" })
+end, { desc = "[S]earch [O]utline" })
+
+-- VTR bindings
 vim.keymap.set("n", "<leader>ja", function()
 	vim.cmd("VtrAttachToPane")
 end)
