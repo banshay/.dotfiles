@@ -243,6 +243,16 @@ require("lazy").setup({
 						},
 					},
 				},
+				ocamllsp = {
+					cmd = {
+						"./_opam/bin/ocamllsp",
+					},
+				},
+				zls = {
+					cmd = {
+						"/home/bopplu/private/projects/zls/zig-out/bin/zls",
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -605,16 +615,36 @@ require("lazy").setup({
 				--   },
 				-- },
 				pickers = {
+					find_files = {
+						theme = "ivy",
+						layout_config = {
+							height = 0.7,
+						},
+					},
+					live_grep = {
+						theme = "ivy",
+						layout_config = {
+							height = 0.7,
+						},
+					},
 					lsp_references = {
+						theme = "ivy",
+						layout_config = {
+							height = 0.7,
+						},
 						show_line = false,
 					},
 					lsp_definitions = {
+						theme = "ivy",
+						layout_config = {
+							height = 0.7,
+						},
 						show_line = false,
 					},
 				},
 				extensions = {
 					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
+						require("telescope.themes").get_ivy(),
 					},
 				},
 			})
@@ -631,6 +661,9 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			vim.keymap.set("n", "<leader>sb", function()
+				builtin.live_grep({ grep_open_files = true })
+			end, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })

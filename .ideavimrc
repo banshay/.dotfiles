@@ -88,3 +88,5 @@ imap <a-k> <Action>(ParameterInfo)
 
 nmap / /\v\c
 nmap ? ?\v\c
+
+nmap <leader>rf <Action>(Synchronize)

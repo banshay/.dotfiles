@@ -1,3 +1,8 @@
+local replace_file_name = function(str)
+	local file_name = vim.fn.expand("%")
+	return string.gsub(str, "%%", file_name)
+end
+
 vim.keymap.set("c", "help", "vert bo help", { noremap = true })
 vim.cmd.cabbrev("h", "vert bo h")
 
@@ -31,6 +36,9 @@ vim.keymap.set("n", "<a-k>", ":m .-2<CR>")
 vim.keymap.set("v", "<J>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<K>", ":m '<-2<CR>gv=gv")
 
+--copy all
+vim.keymap.set("n", "<leader>yh", ":silent %y+<CR>''")
+
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
@@ -61,7 +69,8 @@ vim.keymap.set("n", "<leader>ja", function()
 end)
 
 vim.keymap.set("n", "<leader>jp", function()
-	local buildCommand = vim.g.VTRBUILD
+	local buildCommand = replace_file_name(vim.g.VTRBUILD)
+	vim.cmd("write")
 	if buildCommand then
 		vim.cmd("VtrSendCommandToRunner!" .. buildCommand)
 	else
@@ -80,15 +89,38 @@ vim.keymap.set("n", "<leader>jt", function()
 end)
 
 vim.keymap.set("n", "<leader>jr", function()
-	local runCommand = vim.g.VTRRUN
+	local runCommand = replace_file_name(vim.g.VTRRUN)
+	vim.cmd("write")
 	if runCommand then
 		vim.cmd("VtrSendCommandToRunner! " .. runCommand)
 	else
 		vim.cmd("VtrSendCommandToRunner! zig build run")
 	end
 end)
+
 vim.keymap.set("n", "<leader>jc", function()
 	vim.cmd("VtrSendCtrlC")
+end)
+
+vim.keymap.set("v", "<leader>jr", function()
+	local vstart = vim.fn.getpos("v")
+	local vend = vim.fn.getpos(".")
+
+	local temp = vstart[2]
+	local start_line = vstart[2]
+	local end_line = vend[2]
+
+	if start_line > end_line then
+		start_line = end_line
+		end_line = temp
+	end
+
+	local lines = vim.fn.getline(start_line, end_line)
+	if type(lines) == "string" then
+		lines = { lines }
+	end
+	local concat = table.concat(lines, "")
+	vim.cmd("VtrSendCommandToRunner! " .. concat)
 end)
 
 local function open_next_file()
