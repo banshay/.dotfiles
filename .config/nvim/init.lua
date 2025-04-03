@@ -248,11 +248,11 @@ require("lazy").setup({
 						"./_opam/bin/ocamllsp",
 					},
 				},
-				zls = {
-					cmd = {
-						"/home/bopplu/private/projects/zls/zig-out/bin/zls",
-					},
-				},
+				-- zls = {
+				-- 	cmd = {
+				-- 		"/home/bopplu/private/projects/zls/zig-out/bin/zls",
+				-- 	},
+				-- },
 			}
 
 			-- Ensure the servers and tools above are installed

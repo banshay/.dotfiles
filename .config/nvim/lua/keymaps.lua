@@ -1,6 +1,9 @@
 local replace_file_name = function(str)
 	local file_name = vim.fn.expand("%")
-	return string.gsub(str, "%%", file_name)
+	if file_name then
+		return string.gsub(str, "%%", file_name)
+	end
+	return str
 end
 
 vim.keymap.set("c", "help", "vert bo help", { noremap = true })
@@ -37,7 +40,7 @@ vim.keymap.set("v", "<J>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<K>", ":m '<-2<CR>gv=gv")
 
 --copy all
-vim.keymap.set("n", "<leader>yh", ":silent %y+<CR>''")
+vim.keymap.set("n", "<leader>yh", ":ma a<CR>:silent %y+<CR>'a")
 
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
@@ -80,7 +83,6 @@ end)
 
 vim.keymap.set("n", "<leader>jf", function()
 	local fileName = vim.fn.expand("%")
-	print("Filename: " .. fileName)
 	vim.cmd("VtrSendCommandToRunner! zig test " .. fileName)
 end)
 
