@@ -42,7 +42,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.VtrOrientation = "h"
-vim.g.VtrPercentage = "40%"
+vim.g.VtrPercentage = 45
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -780,36 +780,9 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({
-				lightbulb = {
-					enable = false,
-				},
-			})
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
-		},
-	},
-
 	-- Vim Tmux Runner vtr
 	{
 		"christoomey/vim-tmux-runner",
-	},
-	{
-		"monkoose/matchparen.nvim",
-		config = function()
-			vim.g.loaded_matchparen = 1 -- Disable default matchparen
-			require("matchparen").setup({
-				on_startup = true, -- Should it be enabled by default
-				hl_group = "MatchParen", -- highlight group of the matched brackets
-				augroup_name = "matchparen", -- almost no reason to touch this unless there is already augroup with such name
-				debounce_time = 60, -- debounce time in milliseconds for rehighlighting of brackets.
-			})
-		end,
 	},
 }, {})
 
@@ -1149,8 +1122,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 		end
 	end,
 })
-
-vim.api.nvim_create_user_command("Vims", "enew | setlocal buftype=nofile", {})
 
 --format on save for java
 vim.api.nvim_create_autocmd("BufWritePost", {
