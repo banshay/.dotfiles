@@ -87,6 +87,7 @@ vim.keymap.set("n", "<leader>jf", function()
 end)
 
 vim.keymap.set("n", "<leader>jt", function()
+	vim.cmd("write")
 	vim.cmd("VtrSendCommandToRunner! zig build test --summary all")
 end)
 

@@ -42,7 +42,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.VtrOrientation = "h"
-vim.g.VtrPercentage = 45
+vim.g.VtrPercentage = "40%"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -248,11 +248,11 @@ require("lazy").setup({
 						"./_opam/bin/ocamllsp",
 					},
 				},
-				-- zls = {
-				-- 	cmd = {
-				-- 		"/home/bopplu/private/projects/zls/zig-out/bin/zls",
-				-- 	},
-				-- },
+				zls = {
+					cmd = {
+						"/usr/local/bin/zls",
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -798,6 +798,18 @@ require("lazy").setup({
 	-- Vim Tmux Runner vtr
 	{
 		"christoomey/vim-tmux-runner",
+	},
+	{
+		"monkoose/matchparen.nvim",
+		config = function()
+			vim.g.loaded_matchparen = 1 -- Disable default matchparen
+			require("matchparen").setup({
+				on_startup = true, -- Should it be enabled by default
+				hl_group = "MatchParen", -- highlight group of the matched brackets
+				augroup_name = "matchparen", -- almost no reason to touch this unless there is already augroup with such name
+				debounce_time = 60, -- debounce time in milliseconds for rehighlighting of brackets.
+			})
+		end,
 	},
 }, {})
 

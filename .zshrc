@@ -107,6 +107,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+
 [ -f "/home/banshay/.ghcup/env" ] && source "/home/banshay/.ghcup/env" # ghcup-env
 
 alias nvim='$HOME/.local/bin/nvim.appimage'
@@ -128,3 +129,7 @@ fi
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 export WSLENV="$WSLENV:JAVA_HOME/p"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
