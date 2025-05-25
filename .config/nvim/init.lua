@@ -1150,6 +1150,8 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	end,
 })
 
+vim.api.nvim_create_user_command("Vims", "enew | setlocal buftype=nofile", {})
+
 --format on save for java
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = vim.api.nvim_create_augroup("google-java-format", { clear = true }),
