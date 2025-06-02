@@ -279,6 +279,9 @@ require("lazy").setup({
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
+						local on_attach = require("lsp_keymaps")
+						server.on_attach = on_attach
 						require("lspconfig")[server_name].setup(server)
 					end,
 				},
@@ -614,31 +617,16 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
+				defaults = require("telescope.themes").get_ivy({
+					layout_config = {
+						height = 0.7,
+					},
+				}),
 				pickers = {
-					find_files = {
-						theme = "ivy",
-						layout_config = {
-							height = 0.7,
-						},
-					},
-					live_grep = {
-						theme = "ivy",
-						layout_config = {
-							height = 0.7,
-						},
-					},
 					lsp_references = {
-						theme = "ivy",
-						layout_config = {
-							height = 0.7,
-						},
 						show_line = false,
 					},
 					lsp_definitions = {
-						theme = "ivy",
-						layout_config = {
-							height = 0.7,
-						},
 						show_line = false,
 					},
 				},
