@@ -24,8 +24,7 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessi
 
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
--- we have lsp keymaps for that?
--- vim.keymap.set("n", "gl", vim.lsp.buf.format)
+vim.keymap.set("n", "gl", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<C-S-r>", function()
 	require("lazy.core.loader").reload("intellij-new-theme-nvim")

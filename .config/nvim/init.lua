@@ -42,7 +42,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.VtrOrientation = "h"
-vim.g.VtrPercentage = 45
+vim.g.VtrPercentage = "45%"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -75,21 +75,34 @@ require("lazy").setup({
 	-- Detect tabstop and shiftwidth automatically
 	-- 'tpope/vim-sleuth',
 
-	{ -- LSP Configuration & Plugins
+	-- LSP Configuration & Plugins
+	{
+		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+		-- used for completion, annotations and signatures of Neovim apis
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			-- Mason must be loaded before its dependents so we need to set it up here.
+			-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+			{ "mason-org/mason.nvim", opts = {} },
+			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", commit = "c12f8a5", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
-			{ "folke/neodev.nvim", opts = {} },
+			-- Allows extra capabilities provided by blink.cmp
+			"saghen/blink.cmp",
 		},
 		config = function()
 			-- Brief aside: **What is LSP?**
@@ -201,10 +214,9 @@ require("lazy").setup({
 
 			-- LSP servers and clients are able to communicate to each other what features they support.
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
+			--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -253,15 +265,23 @@ require("lazy").setup({
 						"/usr/local/bin/zls",
 					},
 				},
+				ts_ls = {
+					settings = {
+						typescript = {
+							preferences = {
+								importModuleSpecifier = "relative",
+								importModuleSpecifierEnding = "minimal",
+							},
+						},
+						javascript = {
+							preferences = {
+								importModuleSpecifier = "relative",
+								importModuleSpecifierEnding = "minimal",
+							},
+						},
+					},
+				},
 			}
-
-			-- Ensure the servers and tools above are installed
-			--  To check the current status of installed tools and/or manually install
-			--  other tools, you can run
-			--    :Mason
-			--
-			--  You can press `g?` for help in this menu.
-			require("mason").setup()
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
@@ -272,16 +292,15 @@ require("lazy").setup({
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
+				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+				automatic_installation = false,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for tsserver)
+						-- certain features of an LSP (for example, turning off formatting for ts_ls)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-
-						local on_attach = require("lsp_keymaps")
-						server.on_attach = on_attach
 						require("lspconfig")[server_name].setup(server)
 					end,
 				},
@@ -772,7 +791,23 @@ require("lazy").setup({
 	{
 		"christoomey/vim-tmux-runner",
 	},
+	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({
+				lightbulb = {
+					enable = false,
+				},
+			})
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	},
 }, {})
+
+--end of plugins
 
 --ufo required options
 vim.o.foldcolumn = "0"
@@ -989,108 +1024,9 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
--- -- [[ Configure LSP ]]
--- --  This function gets run when an LSP connects to a particular buffer.
--- local on_attach = require("lsp_keymaps")
---
---
--- -- Enable the following language servers
--- --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
--- --
--- --  Add any additional override configuration in the following tables. They will be passed to
--- --  the `settings` field of the server config. You must look up that documentation yourself.
--- --
--- --  If you want to override the default filetypes that your language server will attach to you can
--- --  define the property 'filetypes' to the map in question.
--- local servers = {
---   -- clangd = {},
---   -- gopls = {},
---   -- pyright = {},
---   -- rust_analyzer = {},
---   -- tsserver = {},
---   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
---
---   lua_ls = {
---     Lua = {
---       workspace = { checkThirdParty = false },
---       telemetry = { enable = false },
---     },
---   },
--- }
-
--- Setup neovim lua configuration
-require("neodev").setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
--- Ensure the servers above are installed
--- local mason_lspconfig = require 'mason-lspconfig'
---
--- mason_lspconfig.setup {
---   ensure_installed = vim.tbl_keys(servers),
--- }
---
--- mason_lspconfig.setup_handlers {
---   function(server_name)
---     require('lspconfig')[server_name].setup {
---       capabilities = capabilities,
---       on_attach = on_attach,
---       settings = servers[server_name],
---       filetypes = (servers[server_name] or {}).filetypes,
---     }
---   end,
---   ["jdtls"] = function() end,
--- }
-
--- -- [[ Configure nvim-cmp ]]
--- -- See `:help cmp`
--- local cmp = require 'cmp'
--- local luasnip = require 'luasnip'
--- require('luasnip.loaders.from_vscode').lazy_load()
--- luasnip.config.setup {}
---
--- cmp.setup {
---   snippet = {
---     expand = function(args)
---       luasnip.lsp_expand(args.body)
---     end,
---   },
---   mapping = cmp.mapping.preset.insert {
---     ['<C-j>'] = cmp.mapping.select_next_item(),
---     ['<C-k>'] = cmp.mapping.select_prev_item(),
---     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---     --    ['<C-f>'] = cmp.mapping.scroll_docs(4),
---     ['<C-Space>'] = cmp.mapping.complete {},
---     ['<CR>'] = cmp.mapping.confirm {
---       behavior = cmp.ConfirmBehavior.Replace,
---     },
---     ['<Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_next_item()
---       elseif luasnip.expand_or_locally_jumpable() then
---         luasnip.expand_or_jump()
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---     ['<S-Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_prev_item()
---       elseif luasnip.locally_jumpable(-1) then
---         luasnip.jump(-1)
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---   },
---   sources = {
---     { name = 'nvim_lsp' },
---     { name = 'luasnip' },
---   },
---   preselect = cmp.PreselectMode.None,
--- }
 
 require("keymaps")
 
@@ -1112,41 +1048,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 })
 
 --format on save for java
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("google-java-format", { clear = true }),
-	pattern = "*.java",
-	callback = function()
-		local bufnr = vim.fn.expand("<abuf>")
-		if bufnr then
-			local full_file_name = vim.fn.expand("%:p")
-			local command = "java -jar "
-				.. vim.fn.expand("~/.local/share/nvim/mason/packages/google-java-format/")
-				.. "google-java-format-1.17.0-all-deps.jar --replace --skip-reflowing-long-strings "
-				.. full_file_name
-
-			-- local replace_content = function(_, data)
-			--   if data then
-			--     vim.api.nvim_buf_set_lines(tonumber(bufnr), 0, -1, false, data)
-			--   end
-			-- end
-
-			vim.fn.jobstart(command, {
-				-- stdout_buffered = true,
-				-- on_stdout = replace_content,
-				-- on_stderr = function(_, err)
-				--   if err then
-				--     print(vim.inspect(err))
-				--   end
-				-- end,
-				on_exit = function()
-					vim.api.nvim_cmd({
-						cmd = "edit",
-					}, {})
-				end,
-			})
-		end
-	end,
-})
 
 vim.api.nvim_create_user_command("Json", function()
 	vim.cmd("set ft=json")

@@ -42,4 +42,8 @@ return function(client, bufnr)
 	--
 	-- nmap("gl", vim.cmd.Format, "Format File")
 	nmap("gl", vim.lsp.buf.format, "Format File")
+
+	nmap("<leader>so", function()
+		require("telescope.builtin").lsp_document_symbols({ symbols = "function" })
+	end, "[S]earch [O]utline")
 end
