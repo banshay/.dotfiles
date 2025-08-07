@@ -92,6 +92,8 @@ vim.keymap.set("n", "<leader>jt", function()
 end)
 
 vim.keymap.set("n", "<leader>jr", function()
+	vim.cmd("VtrSendCtrlC")
+
 	local runCommand = replace_file_name(vim.g.VTRRUN)
 	vim.cmd("write")
 	if runCommand then

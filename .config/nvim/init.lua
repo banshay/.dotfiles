@@ -265,20 +265,9 @@ require("lazy").setup({
 						"/usr/local/bin/zls",
 					},
 				},
-				ts_ls = {
-					settings = {
-						typescript = {
-							preferences = {
-								importModuleSpecifier = "relative",
-								importModuleSpecifierEnding = "minimal",
-							},
-						},
-						javascript = {
-							preferences = {
-								importModuleSpecifier = "relative",
-								importModuleSpecifierEnding = "minimal",
-							},
-						},
+				html = {
+					filetypes = {
+						"zmpl",
 					},
 				},
 			}
@@ -805,6 +794,8 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
+
+	{ "jetzigframework/zmpl.vim" },
 }, {})
 
 --end of plugins
