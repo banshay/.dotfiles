@@ -289,6 +289,7 @@ require("lazy").setup({
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
+						print(server_name .. " " .. server)
 
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
@@ -672,9 +673,9 @@ require("lazy").setup({
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
 				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
 					winblend = 10,
-					previewer = false,
+					previewer = true,
 				}))
 			end, { desc = "[/] Fuzzily search in current buffer" })
 
@@ -1005,3 +1006,4 @@ vim.api.nvim_create_user_command("Json", function()
 	vim.cmd("syntax on")
 	-- vim.cmd("set foldmethod=syntax")
 end, {})
+>>>>>>> 4710cff (update fuzzy finder theme)
