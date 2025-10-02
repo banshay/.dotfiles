@@ -289,7 +289,6 @@ require("lazy").setup({
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						print(server_name .. " " .. server)
 
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
