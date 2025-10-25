@@ -1,1 +1,0 @@
-/home/horde/.config/omarchy/current/theme/neovim.lua
