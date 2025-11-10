@@ -65,3 +65,5 @@ vim.opt.expandtab = true
 
 -- no dash on input while I'm typing
 vim.opt.list = false
+
+vim.opt.wrap = true
