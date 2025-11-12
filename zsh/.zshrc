@@ -125,14 +125,18 @@ if [ -f ~/.localrc ]; then
     . ~/.localrc
 fi
 
+#global aliases
+alias lt="eza -alT -L 2"
+alias la="eza -al"
+
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 export WSLENV="$WSLENV:JAVA_HOME/p"
 
+# sst
+export PATH=/home/bopplu/.sst/bin:$PATH
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# sst
-export PATH=/home/bopplu/.sst/bin:$PATH
