@@ -87,6 +87,7 @@ end)
 
 vim.keymap.set("n", "<leader>jf", function()
 	local fileName = vim.fn.expand("%")
+	vim.cmd("write")
 	vim.cmd("VtrSendCommandToRunner! zig test " .. fileName)
 end)
 
