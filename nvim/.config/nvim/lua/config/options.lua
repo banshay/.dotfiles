@@ -67,3 +67,5 @@ vim.opt.expandtab = true
 vim.opt.list = false
 
 vim.opt.wrap = true
+
+vim.opt.exrc = true
