@@ -134,6 +134,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 export WSLENV="$WSLENV:JAVA_HOME/p"
 
+export AOC_SESSION_TOKEN="session=53616c7465645f5f354ea06eb4e562c0ac137cf4d4cc1a89275af64a7896aee1dd755eefa64766daa8ca4585a216daa814b7a58e03e101ec70dbff6cd8b45ce4"
+
 # sst
 export PATH=/home/bopplu/.sst/bin:$PATH
 
