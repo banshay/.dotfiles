@@ -13,5 +13,8 @@ return {
 		words = {
 			enabled = false,
 		},
+		picker = {
+			enabled = false,
+		},
 	},
 }

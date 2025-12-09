@@ -2,6 +2,17 @@ return {
 	"neovim/nvim-lspconfig",
 	opts = {
 		servers = {
+			["*"] = {
+				keys = {
+					{
+						"gr",
+						function()
+							require("telescope.builtin").lsp_references()
+						end,
+						desc = "Lsp References",
+					},
+				},
+			},
 			zls = {
 				settings = {
 					zls = {

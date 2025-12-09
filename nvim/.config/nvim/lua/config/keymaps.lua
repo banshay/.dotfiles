@@ -66,10 +66,6 @@ vim.keymap.set("n", "<leader>]", ":Ex<CR>k<CR>")
 vim.keymap.set("n", "/", "/\\v\\c")
 vim.keymap.set("n", "?", "?\\v\\c")
 
-vim.keymap.set("n", "<leader>so", function()
-	require("telescope.builtin").lsp_document_symbols({ symbols = "function" })
-end, { desc = "[S]earch [O]utline" })
-
 -- VTR bindings
 vim.keymap.set("n", "<leader>ja", function()
 	vim.cmd("VtrAttachToPane")
