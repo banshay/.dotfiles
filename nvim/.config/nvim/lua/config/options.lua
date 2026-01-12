@@ -69,3 +69,5 @@ vim.opt.list = false
 vim.opt.wrap = true
 
 vim.opt.exrc = true
+
+vim.opt.conceallevel = 0
