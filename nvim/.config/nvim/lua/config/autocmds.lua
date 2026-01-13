@@ -7,12 +7,6 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
-vim.api.nvim_create_user_command("Json", function()
-	vim.cmd("set ft=json")
-	vim.cmd("syntax on")
-	-- vim.cmd("set foldmethod=syntax")
-end, {})
-
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	callback = function()
 		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
@@ -20,3 +14,9 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 		end
 	end,
 })
+
+vim.api.nvim_create_user_command("Json", function()
+	local path = "/tmp/nvim-scratch-" .. os.time() .. ".json"
+	vim.cmd("edit " .. path)
+	vim.bo.bufhidden = "wipe"
+end, {})
