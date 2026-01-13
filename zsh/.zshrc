@@ -136,10 +136,6 @@ export WSLENV="$WSLENV:JAVA_HOME/p"
 
 export AOC_SESSION_TOKEN="session=53616c7465645f5f354ea06eb4e562c0ac137cf4d4cc1a89275af64a7896aee1dd755eefa64766daa8ca4585a216daa814b7a58e03e101ec70dbff6cd8b45ce4"
 
-
-# opencode
-export PATH=/home/bopplu/.opencode/bin:$PATH
-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
