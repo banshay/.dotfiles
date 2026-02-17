@@ -5,5 +5,19 @@
     "messages_half_page_up": "ctrl+u",
     "messages_half_page_down": "ctrl+d",
     "input_move_right": "right",
+  },
+  "provider": {
+    "BanshAI": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "BanshAI",
+      "options": {
+        "baseURL": "http://localhost:8000/api/v1"
+      },
+      "models": {
+        "Qwen3-8b-FLM": {
+          "name": "Qwen3-8b-FLM"
+        }
+      }
+    }
   }
 }
