@@ -11,11 +11,14 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "BanshAI",
       "options": {
-        "baseURL": "http://localhost:8000/api/v1"
+        "baseURL": "http://ai.banshay.net/api/v1"
       },
       "models": {
-        "Qwen3-8b-FLM": {
-          "name": "Qwen3-8b-FLM"
+        "user.minimax-m2.5-2bit": {
+          "name": "Minimax-m2.5",
+        },
+        "user.Qwen3-Coder-Next": {
+          "name": "Qwen3-Coder-Next",
         }
       }
     }
