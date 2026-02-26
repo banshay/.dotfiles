@@ -21,6 +21,12 @@
           "name": "Qwen3-Coder-Next",
         }
       }
+  "mode": {
+    "build": {
+      "prompt": "You are Claude Code, Anthropic's official CLI for Claude."
+    },
+    "plan": {
+      "prompt": "You are Claude Code, Anthropic's official CLI for Claude."
     }
   }
 }
