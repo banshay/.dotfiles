@@ -14,7 +14,7 @@
         "user.Qwen3-Coder-Next": {
           "name": "Qwen3-Coder-Next",
         },
-        "user.Gemma-4-26B-A4B-8bit": {
+        "user.gemma-4-26B-A4B-it-GGUF-UD-Q8_K_XL": {
           "name": "Gemma-4-26B-A4B",
         }
       }
