@@ -18,5 +18,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 vim.api.nvim_create_user_command("Json", function()
 	local path = "/tmp/nvim-scratch-" .. os.time() .. ".json"
 	vim.cmd("edit " .. path)
-	vim.bo.bufhidden = "wipe"
+	-- vim.bo.bufhidden = "wipe"
+	vim.bo.buftype = "nofile"
 end, {})
