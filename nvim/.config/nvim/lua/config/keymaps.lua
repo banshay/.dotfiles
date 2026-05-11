@@ -174,8 +174,18 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set(
+	"n",
+	"<leader>ge",
+	vim.cmd("Lspsaga show_buf_diagnostics"),
+	{ desc = "Open floating diagnostic message for the buffer" }
+)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 vim.keymap.set("n", "<leader>so", function()
 	require("telescope.builtin").lsp_document_symbols({ symbols = "function" })
 end, { desc = "[S]earch [O]utline" })
+
+vim.keymap.set("n", "<leader>gb", function()
+	require("gitsigns").blame()
+end, { desc = "[G]it [B]lame" })
