@@ -66,6 +66,8 @@ vim.keymap.set("n", "<leader>]", ":Ex<CR>k<CR>")
 vim.keymap.set("n", "/", "/\\v\\c")
 vim.keymap.set("n", "?", "?\\v\\c")
 
+vim.keymap.set("v", "<leader>p", '"_dP')
+
 -- VTR bindings
 vim.keymap.set("n", "<leader>ja", function()
 	vim.cmd("VtrAttachToPane")
