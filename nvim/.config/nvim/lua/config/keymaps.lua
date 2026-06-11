@@ -19,6 +19,11 @@ vim.keymap.set("n", "<leader>pv", function()
 	})
 end)
 
+vim.keymap.set("n", "ü", "[", { remap = true })
+vim.keymap.set("n", "è", "]", { remap = true })
+vim.keymap.set("n", "ä", "{")
+vim.keymap.set("n", "à", "}")
+
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
