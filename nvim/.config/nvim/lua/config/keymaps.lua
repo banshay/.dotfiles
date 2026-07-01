@@ -132,7 +132,7 @@ vim.keymap.set("v", "<leader>jr", function()
 	if type(lines) == "string" then
 		lines = { lines }
 	end
-	local concat = table.concat(lines, "")
+	local concat = table.concat(lines, " ")
 	vim.cmd("VtrSendCommandToRunner! " .. concat)
 end)
 
