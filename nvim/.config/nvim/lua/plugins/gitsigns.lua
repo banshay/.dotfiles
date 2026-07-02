@@ -55,7 +55,7 @@ return {
 				vim.keymap.set(
 					"n",
 					"<leader>gp",
-					require("gitsigns").preview_hunk,
+					require("gitsigns").prev_hunk,
 					{ buffer = bufnr, desc = "[G]o to [P]revious Hunk" }
 				)
 				vim.keymap.set(
