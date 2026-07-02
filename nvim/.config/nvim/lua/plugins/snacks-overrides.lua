@@ -16,5 +16,11 @@ return {
 		picker = {
 			enabled = false,
 		},
+		lazygit = {
+			configure = true,
+			config = {
+				os = { editPreset = "nvim-remote" },
+			},
+		},
 	},
 }
