@@ -196,3 +196,10 @@ end, { desc = "[S]earch [O]utline" })
 vim.keymap.set("n", "<leader>gb", function()
 	require("gitsigns").blame()
 end, { desc = "[G]it [B]lame" })
+
+vim.keymap.set("n", "<leader>cf", function()
+	vim.lsp.buf.code_action({
+		context = { only = { "source.fixAll" } },
+		apply = true,
+	})
+end)
