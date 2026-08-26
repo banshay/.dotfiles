@@ -11,6 +11,23 @@ return {
 						end,
 						desc = "Lsp References",
 					},
+
+					{
+						"<leader>ca",
+						function()
+							LazyVim.lsp.action.source()
+						end,
+						desc = "Source Action",
+						has = "codeAction",
+					},
+					{ "<leader>ca", false, mode = "x" },
+					{
+						"<leader>cA",
+						vim.lsp.buf.code_action,
+						desc = "Code Action",
+						mode = { "n", "x" },
+						has = "codeAction",
+					},
 				},
 			},
 			zls = {
