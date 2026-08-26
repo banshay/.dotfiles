@@ -33,7 +33,9 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessi
 
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 
-vim.keymap.set("n", "gl", vim.lsp.buf.format)
+vim.keymap.set("n", "gl", function()
+	require("conform").format({ lsp_format = "never", timeout_ms = 3000 })
+end)
 
 vim.keymap.set("n", "<C-S-r>", function()
 	require("lazy.core.loader").reload("intellij-new-theme-nvim")
