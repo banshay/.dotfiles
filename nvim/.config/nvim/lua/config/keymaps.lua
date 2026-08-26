@@ -208,5 +208,5 @@ end)
 
 vim.keymap.set("n", "<leader>ca", function()
 	LazyVim.lsp.action.source()
-end, { desc = "Source Action", has = "codeAction" })
-vim.keymap.set("n", "<leader>cA", vim.lsp.buf.code_action, { desc = "Code Action", has = "codeAction" })
+end, { desc = "Source Action" })
+vim.keymap.set("n", "<leader>cA", vim.lsp.buf.code_action, { desc = "Code Action" })
