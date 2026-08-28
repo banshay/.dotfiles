@@ -14,10 +14,13 @@
       },
       "models": {
         "user.Qwen3.6-27B-MTP-GGUF-UD-Q4_K_XL": {
-          "name": "Qwen3.6 Coding",
+          "name": "Qwen3.6 Coding"
         },
         "user.Qwen3.6-35B-A3B-GGUF-UD-Q8_K_XL": {
-          "name": "Qwen3.6",
+          "name": "Qwen3.6"
+        },
+        "user.Qwen3.8-Flash-Next-GGUF-UD-Q4_K_XL": {
+          "name": "Qwen3.8 Next"
         }
       }
     }
