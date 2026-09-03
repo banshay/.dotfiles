@@ -1,4 +1,8 @@
 return {
+	{
+		"nvim-telescope/telescope-live-grep-args.nvim",
+		version = "1.1.0",
+	},
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
@@ -68,6 +72,17 @@ return {
 					},
 				},
 				extensions = {
+					live_grep_args = {
+						auto_quoting = true,
+						mappings = {
+							i = {
+								["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+								["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({
+									postfix = " --iglob ",
+								}),
+							},
+						},
+					},
 					["ui-select"] = {
 						require("telescope.themes").get_ivy(),
 					},
@@ -77,6 +92,7 @@ return {
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "live_grep_args")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -85,7 +101,9 @@ return {
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			vim.keymap.set("n", "<leader>sg", function()
+				require("telescope").extensions.live_grep_args.live_grep_args()
+			end, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sb", function()
 				builtin.live_grep({ grep_open_files = true })
 			end, { desc = "[S]earch by [G]rep" })
