@@ -32,7 +32,14 @@ return {
 			},
 			zls = {
 				settings = {
-					zls = {
+			ts_ls = {
+				init_options = {
+					preferences = {
+						importModuleSpecifierPreference = "relative",
+					},
+				},
+			},
+			zls = {
 						inlay_hints_show_builtin = false,
 						inlay_hints_show_parameter_name = true,
 						inlay_hints_hide_redundant_param_names = true,
