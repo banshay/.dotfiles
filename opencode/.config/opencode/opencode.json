@@ -10,9 +10,12 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "BanshAI",
       "options": {
-        "baseURL": "http://ai.banshay.net/api/v1"
+        "baseURL": "http://ai.banshay.net/v1"
       },
       "models": {
+        "Qwen3.8 Flash Next": {
+          "name": "Qwen3.6 FN"
+        },
         "user.Qwen3.6-27B-MTP-GGUF-UD-Q4_K_XL": {
           "name": "Qwen3.6 Coding"
         },
