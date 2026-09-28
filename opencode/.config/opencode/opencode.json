@@ -14,7 +14,7 @@
       },
       "models": {
         "Qwen3.8 Flash Next": {
-          "name": "Qwen3.6 FN"
+          "name": "Qwen3.8 FN"
         },
         "user.Qwen3.6-27B-MTP-GGUF-UD-Q4_K_XL": {
           "name": "Qwen3.6 Coding"
