@@ -1,18 +1,10 @@
 {
   "providers": {
     "banshAI": {
-      "baseUrl": "https://ai.banshay.net/api/v1",
+      "baseUrl": "https://ai.banshay.net/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
-        {
-          "id": "Qwen3.8-27B-GGUF-Q4_0",
-          "name": "Qwen3.8"
-        },
-        {
-          "id": "Qwen3.8-Flash-Next-GGUF-UD-Q4_K_XL",
-          "name": "Qwen3.8 Next"
-        },
         {
           "id": "Qwen3.8 Flash Next",
           "name": "Qwen3.8 FN"
