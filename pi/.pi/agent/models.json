@@ -12,6 +12,10 @@
         {
           "id": "Qwen3.8-Flash-Next-GGUF-UD-Q4_K_XL",
           "name": "Qwen3.8 Next"
+        },
+        {
+          "id": "Qwen3.8 Flash Next",
+          "name": "Qwen3.8 FN"
         }
       ]
     }
