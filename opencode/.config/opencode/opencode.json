@@ -2,19 +2,23 @@
   "$schema": "https://opencode.ai/config.json",
   "compaction": {
     "auto": true,
-    "prune": true,
-    "reserved": 10000
+    "buffer": 10000
   },
-  "provider": {
+  "providers": {
     "BanshAI": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "@ai-sdk/openai-compatible",
       "name": "BanshAI",
-      "options": {
+      "settings": {
         "baseURL": "http://ai.banshay.net/v1"
       },
       "models": {
         "Qwen3.8 Flash Next": {
-          "name": "Qwen3.8 FN"
+          "name": "Qwen3.8 FN",
+          "capabilities": {
+            "tools": true,
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "user.Qwen3.6-27B-MTP-GGUF-UD-Q4_K_XL": {
           "name": "Qwen3.6 Coding"
